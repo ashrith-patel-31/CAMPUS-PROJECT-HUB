@@ -1,53 +1,43 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./Navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [savedUser, setSavedUser] = useState(() => localStorage.getItem("currentUser"));
 
-  const savedUser = localStorage.getItem("currentUser");
+  useEffect(() => {
+    setSavedUser(localStorage.getItem("currentUser"));
+  }, [location.pathname]);
 
   const handleLogout = () => {
     localStorage.removeItem("currentUser");
-
-    alert("Logged out successfully!");
-
+    setSavedUser(null);
     navigate("/login");
   };
 
   return (
-    <nav className="navbar">
-      <h2 className="navbar-title">
-        🎓 Campus Project Hub
-      </h2>
-
-      <div className="navbar-links">
-        <Link to="/">🏠 Home</Link>
-
-        <Link to="/login">🔐 Login</Link>
-
-        <Link to="/register">📝 Register</Link>
-
-        <Link to="/dashboard">📊 Dashboard</Link>
-
-        <Link to="/projects">📁 Projects</Link>
-
-        <Link to="/profile">👤 My Profile</Link>
-
-        <Link to="/my-requests">
-          📨 My Requests
-        </Link>
-
-        <Link to="/join-requests">
-          🤝 Join Requests
-        </Link>
-
-        {savedUser && (
-          <button onClick={handleLogout}>
-            Logout
-          </button>
-        )}
-      </div>
-    </nav>
+    <header className="site-header">
+      <nav className="navbar content-width">
+        <Link to="/" className="navbar-brand"><span className="brand-mark">✳</span><span>Campus Project Hub<small>Find Skills. Build Projects.</small></span></Link>
+        <div className="navbar-links">
+          {!savedUser ? <>
+            <a href="/#features">Features</a>
+            <Link to="/projects">Explore Projects</Link>
+            <Link to="/login" className="nav-signin">Sign in</Link>
+            <Link to="/register" className="nav-get-started">Get Started <span>→</span></Link>
+          </> : <>
+            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/projects">Projects</Link>
+            <Link to="/profile">My Profile</Link>
+            <Link to="/my-requests">My Requests</Link>
+            <Link to="/join-requests">Join Requests</Link>
+            <button className="nav-get-started" onClick={handleLogout}>Log out</button>
+          </>}
+        </div>
+      </nav>
+    </header>
   );
 }
 
