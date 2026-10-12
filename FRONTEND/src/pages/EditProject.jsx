@@ -36,7 +36,7 @@ function EditProject({ projects, setProjects }) {
 
     try {
       const response = await axios.put(
-        `https://campus-project-hub.onrender.com/api/projects/${id}`,
+        `https://campus-project-hub-backend.onrender.com/api/projects/${id}`,
         {
           title: project.title,
           description: project.description,

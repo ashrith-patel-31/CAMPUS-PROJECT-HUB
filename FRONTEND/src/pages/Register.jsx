@@ -23,7 +23,7 @@ function Register() {
 
     try {
       await axios.post(
-        "https://campus-project-hub.onrender.com/api/users/register",
+        "https://campus-project-hub-backend.onrender.com/api/users/register",
         {
           ...user,
           year: Number(user.year),

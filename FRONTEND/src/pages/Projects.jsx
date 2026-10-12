@@ -51,7 +51,7 @@ function Projects({ projects, setProjects }) {
 
     try {
       await axios.delete(
-        `https://campus-project-hub.onrender.com/api/projects/${id}`
+        `https://campus-project-hub-backend.onrender.com/api/projects/${id}`
       );
 
       setProjects((previousProjects) =>

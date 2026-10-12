@@ -26,7 +26,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "https://campus-project-hub.onrender.com/api/users/login",
+        "https://campus-project-hub-backend.onrender.com/api/users/login",
         user
       );
 
@@ -53,7 +53,7 @@ function Login() {
         }
       } else if (error.request) {
         alert(
-          "Cannot connect to the backend. Check that Spring Boot is running on https://campus-project-hub.onrender.com and inspect the browser console for CORS errors."
+          "Cannot connect to the backend. Check that Spring Boot is running on https://campus-project-hub-backend.onrender.com and inspect the browser console for CORS errors."
         );
       } else {
         alert("An unexpected error occurred. Please try again.");

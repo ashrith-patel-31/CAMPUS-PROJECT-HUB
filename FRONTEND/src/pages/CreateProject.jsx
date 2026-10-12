@@ -43,7 +43,7 @@ function CreateProject({ setProjects }) {
 
     try {
       const response = await axios.post(
-        "https://campus-project-hub.onrender.com/api/projects",
+        "https://campus-project-hub-backend.onrender.com/api/projects",
         {
           ...project,
           teamSize: Number(project.teamSize),

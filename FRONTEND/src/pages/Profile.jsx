@@ -48,7 +48,7 @@ function Profile() {
 
     try {
       const response = await axios.put(
-        `https://campus-project-hub.onrender.com/api/users/${currentUser.id}`,
+        `https://campus-project-hub-backend.onrender.com/api/users/${currentUser.id}`,
         {
           ...profile,
           year: profile.year === "" ? null : Number(profile.year),
