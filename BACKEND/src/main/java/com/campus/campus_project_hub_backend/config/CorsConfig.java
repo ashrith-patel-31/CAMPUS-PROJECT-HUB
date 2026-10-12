@@ -14,15 +14,15 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins(
-                                "https://campus-project-hub-frontend.onrender.com"
-                        )
-                        .allowedMethods(
-                                "GET", "POST", "PUT", "PATCH",
-                                "DELETE", "OPTIONS"
-                        )
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
+                    .allowedOrigins(
+                        "https://campus-project-hub-frontend.onrender.com"
+                    )
+                    .allowedMethods(
+                        "GET", "POST", "PUT",
+                        "DELETE", "OPTIONS", "PATCH"
+                    )
+                    .allowedHeaders("*")
+                    .allowCredentials(true);
             }
         };
     }
