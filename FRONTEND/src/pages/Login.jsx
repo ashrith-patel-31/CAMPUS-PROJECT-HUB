@@ -53,7 +53,7 @@ function Login() {
         }
       } else if (error.request) {
         alert(
-          "Cannot connect to the backend. Check that Spring Boot is running on localhost:8080 and inspect the browser console for CORS errors."
+          "Cannot connect to the backend. Check that Spring Boot is running on https://campus-project-hub.onrender.com and inspect the browser console for CORS errors."
         );
       } else {
         alert("An unexpected error occurred. Please try again.");
