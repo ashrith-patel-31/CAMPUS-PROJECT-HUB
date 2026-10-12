@@ -1,4 +1,4 @@
-package com.campus.campus_project_hub_backend;
+package com.campus;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,10 +13,16 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**")
-                        .allowedOrigins("http://localhost:5173")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*");
+                registry.addMapping("/**")
+                        .allowedOrigins(
+                                "https://campus-project-hub-frontend.onrender.com"
+                        )
+                        .allowedMethods(
+                                "GET", "POST", "PUT", "PATCH",
+                                "DELETE", "OPTIONS"
+                        )
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
             }
         };
     }
