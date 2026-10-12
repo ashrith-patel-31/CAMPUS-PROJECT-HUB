@@ -31,7 +31,7 @@ function Profile() {
 
     try {
       const response = await axios.put(
-        `http://localhost:8080/api/users/${currentUser.id}`,
+        `https://campus-project-hub-backend-foed.onrender.com/api/users/${currentUser.id}`,
         {
           ...profile,
           year: Number(profile.year),

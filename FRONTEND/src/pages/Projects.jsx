@@ -28,7 +28,7 @@ function Projects({ projects, setProjects }) {
     const confirmDelete = window.confirm("Are you sure you want to delete this project?");
     if (!confirmDelete) return;
     try {
-      await axios.delete(`http://localhost:8080/api/projects/${id}`);
+      await axios.delete(`https://campus-project-hub-backend-foed.onrender.com/api/projects/${id}`);
       setProjects(projects.filter((project) => project.id !== id));
       alert("Project deleted successfully!");
     } catch (error) {

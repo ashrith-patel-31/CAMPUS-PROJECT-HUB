@@ -16,7 +16,7 @@ function MyRequests() {
 
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/join-requests"
+          "https://campus-project-hub-backend-foed.onrender.com/api/join-requests"
         );
 
         const myRequests = response.data.filter(

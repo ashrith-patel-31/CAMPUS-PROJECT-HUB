@@ -28,7 +28,7 @@ function App() {
   // Load projects from Spring Boot backend
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/projects")
+      .get("https://campus-project-hub-backend-foed.onrender.com/api/projects")
       .then((response) => {
         setProjects(response.data);
       })

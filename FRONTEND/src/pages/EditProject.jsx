@@ -28,7 +28,7 @@ function EditProject({ projects, setProjects }) {
 
     try {
       const response = await axios.put(
-        `http://localhost:8080/api/projects/${id}`,
+        `https://campus-project-hub-backend-foed.onrender.com/api/projects/${id}`,
         {
           title: project.title,
           description: project.description,

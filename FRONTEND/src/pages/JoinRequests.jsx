@@ -13,7 +13,7 @@ function JoinRequests() {
   const loadRequests = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/join-requests"
+        "https://campus-project-hub-backend-foed.onrender.com/api/join-requests"
       );
 
       // Show only requests for projects owned by
@@ -41,7 +41,7 @@ function JoinRequests() {
   const handleRequest = async (id, status) => {
     try {
       const response = await axios.put(
-        `http://localhost:8080/api/join-requests/${id}/status?status=${status}`
+        `https://campus-project-hub-backend-foed.onrender.com/api/join-requests/${id}/status?status=${status}`
       );
 
       const updatedRequests = joinRequests.map(

@@ -20,7 +20,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8080/api/users/register", {
+      await axios.post("https://campus-project-hub-backend-foed.onrender.com/api/users/register", {
         ...user,
         year: Number(user.year),
       });

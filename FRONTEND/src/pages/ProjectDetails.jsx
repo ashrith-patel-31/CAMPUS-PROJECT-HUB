@@ -70,7 +70,7 @@ function ProjectDetails({ projects }) {
       };
 
       await axios.post(
-        "http://localhost:8080/api/join-requests",
+        "https://campus-project-hub-backend-foed.onrender.com/api/join-requests",
         newRequest
       );
 
