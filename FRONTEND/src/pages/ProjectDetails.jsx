@@ -70,7 +70,7 @@ function ProjectDetails({ projects }) {
       };
 
       await axios.post(
-        "https://https://campus-project-hub-backend.onrender.com/api/join-requests",
+        "https://campus-project-hub-backend.onrender.com/api/join-requests",
         newRequest
       );
 
