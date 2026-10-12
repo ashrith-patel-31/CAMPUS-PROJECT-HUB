@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -6,11 +6,19 @@ function EditProject({ projects, setProjects }) {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const projectId = Number(id);
+
   const existingProject = projects.find(
-    (project) => project.id === Number(id)
+    (item) => item.id === projectId
   );
 
-  const [project, setProject] = useState(existingProject);
+  const [project, setProject] = useState(existingProject || null);
+
+  useEffect(() => {
+    if (existingProject) {
+      setProject(existingProject);
+    }
+  }, [existingProject]);
 
   if (!project) {
     return <h2>Project not found</h2>;
@@ -28,7 +36,7 @@ function EditProject({ projects, setProjects }) {
 
     try {
       const response = await axios.put(
-        `https://campus-project-hub-backend-foed.onrender.com/api/projects/${id}`,
+        `http://localhost:8080/api/projects/${id}`,
         {
           title: project.title,
           description: project.description,
@@ -38,18 +46,26 @@ function EditProject({ projects, setProjects }) {
         }
       );
 
-      const updatedProjects = projects.map((item) =>
-        item.id === Number(id) ? response.data : item
+      setProjects((previousProjects) =>
+        previousProjects.map((item) =>
+          item.id === projectId ? response.data : item
+        )
       );
 
-      setProjects(updatedProjects);
-
       alert("Project updated successfully!");
-
       navigate("/projects");
     } catch (error) {
       console.error("Error updating project:", error);
-      alert("Failed to update project.");
+
+      if (error.code === "ERR_NETWORK") {
+        alert(
+          "Cannot connect to the backend. Make sure Spring Boot is running on port 8080."
+        );
+      } else if (error.response?.status === 404) {
+        alert("Project not found on the server.");
+      } else {
+        alert("Failed to update project. Check the backend logs.");
+      }
     }
   };
 
@@ -62,7 +78,7 @@ function EditProject({ projects, setProjects }) {
           type="text"
           name="title"
           placeholder="Project Title"
-          value={project.title}
+          value={project.title || ""}
           onChange={handleChange}
           required
         />
@@ -73,7 +89,7 @@ function EditProject({ projects, setProjects }) {
         <textarea
           name="description"
           placeholder="Project Description"
-          value={project.description}
+          value={project.description || ""}
           onChange={handleChange}
           required
         />
@@ -85,7 +101,7 @@ function EditProject({ projects, setProjects }) {
           type="text"
           name="category"
           placeholder="Project Category"
-          value={project.category}
+          value={project.category || ""}
           onChange={handleChange}
           required
         />
@@ -97,7 +113,8 @@ function EditProject({ projects, setProjects }) {
           type="number"
           name="teamSize"
           placeholder="Team Size"
-          value={project.teamSize}
+          min="1"
+          value={project.teamSize ?? ""}
           onChange={handleChange}
           required
         />
@@ -109,7 +126,7 @@ function EditProject({ projects, setProjects }) {
           type="text"
           name="skills"
           placeholder="Required Skills"
-          value={project.skills}
+          value={project.skills || ""}
           onChange={handleChange}
           required
         />
@@ -117,9 +134,7 @@ function EditProject({ projects, setProjects }) {
         <br />
         <br />
 
-        <button type="submit">
-          Update Project
-        </button>
+        <button type="submit">Update Project</button>
       </form>
     </div>
   );

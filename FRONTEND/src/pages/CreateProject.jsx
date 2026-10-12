@@ -27,14 +27,23 @@ function CreateProject({ setProjects }) {
 
     if (!savedUser) {
       alert("Please login before creating a project.");
+      navigate("/login");
       return;
     }
 
-    const currentUser = JSON.parse(savedUser);
+    let currentUser;
+
+    try {
+      currentUser = JSON.parse(savedUser);
+    } catch {
+      alert("Your login session is invalid. Please log in again.");
+      navigate("/login");
+      return;
+    }
 
     try {
       const response = await axios.post(
-        "https://campus-project-hub-backend-foed.onrender.com/api/projects",
+        "http://localhost:8080/api/projects",
         {
           ...project,
           teamSize: Number(project.teamSize),
@@ -49,11 +58,17 @@ function CreateProject({ setProjects }) {
       ]);
 
       alert("Project created successfully!");
-
       navigate("/projects");
     } catch (error) {
       console.error("Error creating project:", error);
-      alert("Failed to create project.");
+
+      if (error.code === "ERR_NETWORK") {
+        alert("Cannot connect to the backend. Make sure Spring Boot is running on port 8080.");
+      } else if (error.response?.status === 400) {
+        alert("Invalid project details. Please check the form.");
+      } else {
+        alert("Failed to create project. Please check the backend logs.");
+      }
     }
   };
 
@@ -101,6 +116,7 @@ function CreateProject({ setProjects }) {
           type="number"
           name="teamSize"
           placeholder="Team Size"
+          min="1"
           value={project.teamSize}
           onChange={handleChange}
           required
@@ -121,9 +137,7 @@ function CreateProject({ setProjects }) {
         <br />
         <br />
 
-        <button type="submit">
-          Create Project
-        </button>
+        <button type="submit">Create Project</button>
       </form>
     </div>
   );
