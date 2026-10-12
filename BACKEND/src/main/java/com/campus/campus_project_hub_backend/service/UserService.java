@@ -1,8 +1,9 @@
 package com.campus.campus_project_hub_backend.service;
 
+import org.springframework.stereotype.Service;
+
 import com.campus.campus_project_hub_backend.entity.User;
 import com.campus.campus_project_hub_backend.repository.UserRepository;
-import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
@@ -15,6 +16,10 @@ public class UserService {
 
     public User registerUser(User user) {
 
+        if (user.getEmail() == null || user.getPassword() == null) {
+            return null;
+        }
+
         if (userRepository.existsByEmail(user.getEmail())) {
             return null;
         }
@@ -24,9 +29,15 @@ public class UserService {
 
     public User loginUser(String email, String password) {
 
+        if (email == null || password == null) {
+            return null;
+        }
+
         User user = userRepository.findByEmail(email);
 
-        if (user != null && user.getPassword().equals(password)) {
+        if (user != null
+                && user.getPassword() != null
+                && user.getPassword().equals(password)) {
             return user;
         }
 

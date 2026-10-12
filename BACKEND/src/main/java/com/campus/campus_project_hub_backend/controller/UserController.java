@@ -1,13 +1,23 @@
 package com.campus.campus_project_hub_backend.controller;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.campus.campus_project_hub_backend.entity.User;
 import com.campus.campus_project_hub_backend.service.UserService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "https://campus-project-hub-frontend.onrender.com"
+})
 public class UserController {
 
     private final UserService userService;
