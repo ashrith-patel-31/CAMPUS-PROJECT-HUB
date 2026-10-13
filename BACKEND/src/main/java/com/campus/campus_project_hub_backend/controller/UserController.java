@@ -1,10 +1,11 @@
+```java
 package com.campus.campus_project_hub_backend.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,41 +28,38 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
-
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
         User registeredUser = userService.registerUser(user);
 
         if (registeredUser == null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest()
+                    .body("Registration failed. Email may already exist or required fields are missing.");
         }
 
         return ResponseEntity.ok(registeredUser);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> loginUser(
-            @RequestBody User user) {
-
-        User loggedInUser =
-                userService.loginUser(
-                        user.getEmail(),
-                        user.getPassword()
-                );
+    public ResponseEntity<?> loginUser(@RequestBody User user) {
+        User loggedInUser = userService.loginUser(
+                user.getEmail(),
+                user.getPassword()
+        );
 
         if (loggedInUser == null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(401)
+                    .body("Invalid email or password.");
         }
 
         return ResponseEntity.ok(loggedInUser);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(
+    public ResponseEntity<?> updateUser(
             @PathVariable Long id,
             @RequestBody User user) {
 
-        User updatedUser =
-                userService.updateUser(id, user);
+        User updatedUser = userService.updateUser(id, user);
 
         if (updatedUser == null) {
             return ResponseEntity.notFound().build();
@@ -70,3 +68,4 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 }
+```

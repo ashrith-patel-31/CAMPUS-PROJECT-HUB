@@ -63,7 +63,7 @@ function CreateProject({ setProjects }) {
       console.error("Error creating project:", error);
 
       if (error.code === "ERR_NETWORK") {
-        alert("Cannot connect to the backend. Make sure Spring Boot is running on port 8080.");
+        alert("alert("Unable to connect to the server. Please try again later.");");
       } else if (error.response?.status === 400) {
         alert("Invalid project details. Please check the form.");
       } else {

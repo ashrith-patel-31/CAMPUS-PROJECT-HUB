@@ -38,7 +38,7 @@ function Register() {
       if (error.response?.status === 400) {
         alert("Registration failed. Check your details or whether the email is already registered.");
       } else if (error.code === "ERR_NETWORK") {
-        alert("Cannot connect to the backend. Make sure Spring Boot is running on port 8080.");
+        alert("alert("Unable to connect to the server. Please try again later.");");
       } else {
         alert("Registration failed. Please try again.");
       }

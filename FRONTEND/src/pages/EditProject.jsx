@@ -59,7 +59,7 @@ function EditProject({ projects, setProjects }) {
 
       if (error.code === "ERR_NETWORK") {
         alert(
-          "Cannot connect to the backend. Make sure Spring Boot is running on port 8080."
+          "alert("Unable to connect to the server. Please try again later.");"
         );
       } else if (error.response?.status === 404) {
         alert("Project not found on the server.");
