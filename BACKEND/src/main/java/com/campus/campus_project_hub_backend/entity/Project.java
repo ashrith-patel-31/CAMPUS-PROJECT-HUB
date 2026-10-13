@@ -1,11 +1,10 @@
+```java
 package com.campus.campus_project_hub_backend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "project")
 public class Project {
 
     @Id
@@ -13,27 +12,24 @@ public class Project {
     private Long id;
 
     private String title;
+
+    @Column(length = 2000)
     private String description;
+
     private String category;
-    private Integer teamSize;
+
     private String skills;
 
+    @Column(name = "team_size")
+    private Integer teamSize;
+
+    @Column(name = "owner_id")
     private Long ownerId;
+
+    @Column(name = "owner_name")
     private String ownerName;
 
     public Project() {
-    }
-
-    public Project(String title, String description, String category,
-                   Integer teamSize, String skills,
-                   Long ownerId, String ownerName) {
-        this.title = title;
-        this.description = description;
-        this.category = category;
-        this.teamSize = teamSize;
-        this.skills = skills;
-        this.ownerId = ownerId;
-        this.ownerName = ownerName;
     }
 
     public Long getId() {
@@ -68,20 +64,20 @@ public class Project {
         this.category = category;
     }
 
-    public Integer getTeamSize() {
-        return teamSize;
-    }
-
-    public void setTeamSize(Integer teamSize) {
-        this.teamSize = teamSize;
-    }
-
     public String getSkills() {
         return skills;
     }
 
     public void setSkills(String skills) {
         this.skills = skills;
+    }
+
+    public Integer getTeamSize() {
+        return teamSize;
+    }
+
+    public void setTeamSize(Integer teamSize) {
+        this.teamSize = teamSize;
     }
 
     public Long getOwnerId() {
@@ -100,3 +96,4 @@ public class Project {
         this.ownerName = ownerName;
     }
 }
+```
