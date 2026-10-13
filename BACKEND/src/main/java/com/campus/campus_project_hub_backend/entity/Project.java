@@ -1,7 +1,11 @@
-```java
 package com.campus.campus_project_hub_backend.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "project")
@@ -96,4 +100,3 @@ public class Project {
         this.ownerName = ownerName;
     }
 }
-```
